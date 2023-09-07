@@ -1,0 +1,50 @@
+{
+  "catalogs" : {
+    "models" : {
+      "name" : "Aggregated Camel catalog for models",
+      "version" : "4.0.0",
+      "file" : "camel-catalog-aggregate-models-4.0.0.json"
+    },
+    "components" : {
+      "name" : "Aggregated Camel catalog for components",
+      "version" : "4.0.0",
+      "file" : "camel-catalog-aggregate-components-4.0.0.json"
+    },
+    "languages" : {
+      "name" : "Aggregated Camel catalog for languages",
+      "version" : "4.0.0",
+      "file" : "camel-catalog-aggregate-languages-4.0.0.json"
+    },
+    "kamelets" : {
+      "name" : "Aggregated Kamelet definitions in JSON",
+      "version" : "4.0.0-RC1",
+      "file" : "kamelets-aggregate-4.0.0-RC1.json"
+    },
+    "dataformats" : {
+      "name" : "Aggregated Camel catalog for dataformats",
+      "version" : "4.0.0",
+      "file" : "camel-catalog-aggregate-dataformats-4.0.0.json"
+    }
+  },
+  "schemas" : [ {
+    "name" : "Camel YAML DSL JSON schema",
+    "version" : "4.0.0",
+    "file" : "camelYamlDsl-4.0.0.json"
+  }, {
+    "name" : "Integration",
+    "version" : "2.0.0",
+    "file" : "crd-schema-integration-2.0.0.json"
+  }, {
+    "name" : "Kamelet",
+    "version" : "2.0.0",
+    "file" : "crd-schema-kamelet-2.0.0.json"
+  }, {
+    "name" : "KameletBinding",
+    "version" : "2.0.0",
+    "file" : "crd-schema-kameletbinding-2.0.0.json"
+  }, {
+    "name" : "Pipe",
+    "version" : "2.0.0",
+    "file" : "crd-schema-pipe-2.0.0.json"
+  } ]
+}
