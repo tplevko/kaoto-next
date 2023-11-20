@@ -32,8 +32,12 @@
     "build:lib": "yarn rimraf ./lib && yarn copy-catalog && yarn build:esm && yarn build:cjs",
     "build:esm": "tsc --project tsconfig.esm.json && copyfiles -u 1 ./src/**/*.scss ./src/assets/** ./lib/esm",
     "build:cjs": "tsc --project tsconfig.cjs.json && copyfiles -u 1 ./src/**/*.scss ./src/assets/** ./lib/cjs",
+<<<<<<< HEAD
     "copy-catalog": "node ./scripts/copy-camel-catalog-files.js ./lib/camel-catalog",
     "preview": "vite preview",
+=======
+    "preview": "vite preview --host",
+>>>>>>> dc6d3b7 (chore(e2e-runner) - update e2e runner image version)
     "test": "jest",
     "test:watch": "jest --watch",
     "lint": "yarn eslint \"src/**/*.{ts,tsx}\"",
@@ -88,7 +92,7 @@
     "@types/react-dom": "^18.2.10",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
-    "@vitejs/plugin-react": "^4.0.3",
+    "@vitejs/plugin-react": "^4.2.0",
     "babel-jest": "^29.4.2",
     "copyfiles": "^2.4.1",
     "eslint": "^8.45.0",
@@ -113,6 +117,6 @@
     "typescript": "^5.0.2",
     "vite": "^5.0.0",
     "vite-plugin-dts": "^3.5.1",
-    "vite-plugin-static-copy": "^0.17.0"
+    "vite-plugin-static-copy": "^0.17.1"
   }
 }
