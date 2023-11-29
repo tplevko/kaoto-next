@@ -2,17 +2,18 @@ import { Pipe } from '@kaoto-next/camel-catalog/types';
 import { JSONSchemaType } from 'ajv';
 import cloneDeep from 'lodash/cloneDeep';
 import { pipeJson } from '../../../stubs/pipe';
-import { EntityType } from '../../camel/entities';
+import { EntityType, PipeMetadata } from '../../camel/entities';
 import { PipeVisualEntity } from './';
 import { KameletSchemaService } from './support/kamelet-schema.service';
 
 describe('Pipe', () => {
   let pipeCR: Pipe;
   let pipe: PipeVisualEntity;
+  let metadata: PipeMetadata;
 
   beforeEach(() => {
     pipeCR = cloneDeep(pipeJson);
-    pipe = new PipeVisualEntity(pipeCR.spec!);
+    pipe = new PipeVisualEntity(metadata, pipeCR.spec!);
   });
 
   describe('id', () => {
@@ -27,6 +28,11 @@ describe('Pipe', () => {
 
     it('should return the id', () => {
       expect(pipe.getId()).toEqual(expect.any(String));
+    });
+
+    it('should change the id', () => {
+      pipe.setId('pipe-12345');
+      expect(pipe.getId()).toEqual('pipe-12345');
     });
   });
 
