@@ -19,7 +19,7 @@ on:
 # List of jobs
 jobs:
   chromatic-deployment:
-    if: github.repository == 'KaotoIO/kaoto-next' && github.actor != 'renovate[bot]' && !github.event.pull_request.draft
+    if: github.actor != 'renovate[bot]' && !github.event.pull_request.draft
     # Operating System
     runs-on: ubuntu-latest
     # Job steps

@@ -11,6 +11,7 @@ interface TileProps {
   onTagClick: (_event: unknown, value: string) => void;
 }
 
+//TMP
 export const Tile: FunctionComponent<PropsWithChildren<TileProps>> = (props) => {
   const onTileClick = useCallback(() => {
     props.onClick(props.tile);
