@@ -3,6 +3,7 @@ import { FunctionComponent } from 'react';
 import { ErrorBoundary } from '../../ErrorBoundary';
 import { CanvasForm } from './CanvasForm';
 import { CanvasNode } from './canvas.models';
+import './CanvasSideBar.scss';
 
 interface CanvasSideBarProps {
   selectedNode: CanvasNode | undefined;
@@ -15,12 +16,14 @@ export const CanvasSideBar: FunctionComponent<CanvasSideBarProps> = (props) => {
      * We cannot use the onClose property since the button has 'position: absolute'
      * and doesn't take into account the sidebar children.
      */
-    <TopologySideBar show={props.selectedNode !== undefined}>
-      {props.selectedNode === undefined ? null : (
-        <ErrorBoundary key={props.selectedNode.id} fallback={<p>Something didn't work as expected</p>}>
-          <CanvasForm selectedNode={props.selectedNode} onClose={props.onClose} />
-        </ErrorBoundary>
-      )}
-    </TopologySideBar>
+    <div className="canvas-sidebar-form">
+      <TopologySideBar show={props.selectedNode !== undefined} resizable={true}>
+        {props.selectedNode === undefined ? null : (
+          <ErrorBoundary key={props.selectedNode.id} fallback={<p>Something didn't work as expected</p>}>
+            <CanvasForm selectedNode={props.selectedNode} onClose={props.onClose} />
+          </ErrorBoundary>
+        )}
+      </TopologySideBar>
+    </div>
   );
 };
