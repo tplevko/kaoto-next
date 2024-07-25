@@ -134,6 +134,10 @@ export class ExpressionService {
     Object.values(languageCatalogMap).forEach((language) => {
       delete parentModel[language.model.name];
     });
+    if (!languageModelName || !languageCatalogMap[languageModelName]) {
+      delete parentModel.expression;
+      return;
+    }
     parentModel.expression = {};
     (parentModel.expression as Record<string, unknown>)[languageModelName] = newExpressionModel;
   }
