@@ -6,10 +6,7 @@ describe('Test for interceptSendToEndpoint configuration container', () => {
   it('Root interceptSendToEndpoint configuration', () => {
     cy.selectCamelRouteType('Configuration', 'interceptSendToEndpoint');
 
-    cy.get('[data-id^="interceptSendToEndpoint"]')
-      .find('.pf-topology__node__label')
-      .find('.pf-topology__node__label__background')
-      .click();
+    cy.openStepConfigurationTab('interceptSendToEndpoint');
     cy.selectFormTab('All');
 
     cy.interactWithConfigInputObject('description', 'testDescription');

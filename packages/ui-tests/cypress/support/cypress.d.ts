@@ -43,7 +43,7 @@ declare global {
       showAllRoutes(): Chainable<JQuery<Element>>;
       // design
       openStepConfigurationTab(step: string, stepIndex?: number): Chainable<JQuery<Element>>;
-      toggleExpandGroup(groupName: string, groupIndex?: number): Chainable<JQuery<Element>>;
+      toggleExpandGroup(groupName: string): Chainable<JQuery<Element>>;
       fitToScreen(): Chainable<JQuery<Element>>;
       closeStepConfigurationTab(): Chainable<JQuery<Element>>;
       closeCatalogModal(): Chainable<JQuery<Element>>;
