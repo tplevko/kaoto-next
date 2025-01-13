@@ -118,6 +118,14 @@ Cypress.Commands.add('closeFlowsListIfVisible', () => {
   });
 });
 
+Cypress.Commands.add('openFlowsListIfClosed', () => {
+  cy.get('body').then((body) => {
+    if (body.find('[data-testid="flows-list-table"]').length === 0) {
+      cy.toggleFlowsList();
+    }
+  });
+});
+
 Cypress.Commands.add('allignAllRoutesVisibility', (switchvisibility: string) => {
   cy.toggleFlowsList();
   cy.get('[data-testid="flows-list-table"]').then((body) => {
@@ -143,27 +151,27 @@ Cypress.Commands.add('showAllRoutes', () => {
 });
 
 Cypress.Commands.add('deleteRoute', (index: number) => {
-  cy.toggleFlowsList();
+  cy.openFlowsListIfClosed();
   cy.get('button[data-testid^="delete-btn-route"]').then((buttons) => {
-    cy.wrap(buttons[index]).click();
+    cy.wrap(buttons[index]).click({ force: true });
   });
   cy.get('body').then(($body) => {
     if ($body.find('.pf-m-danger').length) {
       // Delete Confirmation Modal appeared, click on the confirm button
-      cy.get('.pf-m-danger').click();
+      cy.get('.pf-m-danger').click({ force: true });
     }
   });
   cy.closeFlowsListIfVisible();
 });
 
 Cypress.Commands.add('cancelDeleteRoute', (index: number) => {
-  cy.toggleFlowsList();
+  cy.openFlowsListIfClosed();
   cy.get('button[data-testid^="delete-btn-route"]').then((buttons) => {
-    cy.wrap(buttons[index]).click();
+    cy.wrap(buttons[index]).click({ force: true });
   });
   cy.get('body').then(($body) => {
     if ($body.find('.pf-m-danger').length) {
-      cy.get('[data-testid="action-confirmation-modal-btn-cancel"]').click();
+      cy.get('[data-testid="action-confirmation-modal-btn-cancel"]').click({ force: true });
     }
   });
   cy.closeFlowsListIfVisible();
