@@ -6,13 +6,13 @@ describe('Test source code editor', () => {
   it('loads the YAML editor and deletes steps, check with visualization', () => {
     cy.uploadFixture('flows/kameletBinding/kafkaSourceSink.yaml');
     cy.openDesignPage();
-    cy.get('[data-id^="json-deserialize-action"]').should('exist');
+    cy.get('[data-id^="Updated integration|steps.0"]').should('exist');
     cy.openSourceCode();
     cy.editorDeleteLine(19, 5);
 
     // CHECK that the code editor contains the new timer source step
     cy.openDesignPage();
-    cy.checkNodeExist('json-deserialize-action', 0);
+    cy.checkNodeExist('Updated integration|steps.0', 0);
   });
 
   it('User adds step to the YAML', () => {
@@ -36,7 +36,7 @@ describe('Test source code editor', () => {
     cy.editorDeleteLine(12, 6);
     cy.openDesignPage();
     // CHECK the kafka-sink step was removed
-    cy.checkNodeExist('kafka-sink', 0);
+    cy.checkNodeExist('integration|kafka-sink', 0);
   });
 
   it('User edits step in the YAML', () => {
