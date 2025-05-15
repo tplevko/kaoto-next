@@ -68,6 +68,15 @@ Cypress.Commands.add('checkMultiLineContent', (textContent: string[]) => {
   cy.get('.monaco-editor')
     .invoke('text')
     .then(($value) => {
+      // workaround for sporadic failures of basicXml.cy.ts on edge - https://github.com/KaotoIO/kaoto/issues/2278
+      if ($value.includes('')) {
+        cy.wait(1000);
+        cy.get('.monaco-editor')
+          .invoke('text')
+          .then(($newValue) => {
+            $value = $newValue;
+          });
+      }
       const linesArray = $value.split(/\s{2,}/).map((line) => line.trim());
       // deep include to check if all the lines are present in the editor
       expect(linesArray).to.deep.include.members(modifiedTextContent);
