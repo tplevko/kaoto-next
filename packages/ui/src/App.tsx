@@ -1,6 +1,6 @@
 import { SuggestionRegistryProvider } from '@kaoto/forms';
 import { VisualizationProvider } from '@patternfly/react-topology';
-import { useLayoutEffect, useMemo } from 'react';
+import { FunctionComponent, useContext, useLayoutEffect, useMemo } from 'react';
 import { Outlet } from 'react-router-dom';
 import { RenderingProvider } from './components/RenderingAnchor/rendering.provider';
 import { ControllerService } from './components/Visualization/Canvas/controller.service';
@@ -12,11 +12,13 @@ import { LocalStorageSettingsAdapter } from './models/settings/localstorage-sett
 import {
   CatalogLoaderProvider,
   CatalogTilesProvider,
+  EntitiesContext,
   EntitiesProvider,
   RuntimeProvider,
   SchemasLoaderProvider,
   SettingsProvider,
   SourceCodeLocalStorageProvider,
+  VisibleFlowsContext,
   VisibleFlowsProvider,
 } from './providers';
 import { isDefined } from './utils';
@@ -24,7 +26,6 @@ import { CatalogSchemaLoader } from './utils/catalog-schema-loader';
 import { setColorScheme } from './utils/color-scheme';
 
 function App() {
-  const controller = useMemo(() => ControllerService.createController(), []);
   const settingsAdapter = new LocalStorageSettingsAdapter();
   let catalogUrl = CatalogSchemaLoader.DEFAULT_CATALOG_PATH;
   const settingsCatalogUrl = settingsAdapter.getSettings().catalogUrl;
@@ -47,21 +48,9 @@ function App() {
               <EntitiesProvider>
                 <Shell>
                   <CatalogTilesProvider>
-                    <VisualizationProvider controller={controller}>
-                      <VisibleFlowsProvider>
-                        <RenderingProvider>
-                          <RegisterComponents>
-                            <NodeInteractionAddonProvider>
-                              <RegisterNodeInteractionAddons>
-                                <SuggestionRegistryProvider>
-                                  <Outlet />
-                                </SuggestionRegistryProvider>
-                              </RegisterNodeInteractionAddons>
-                            </NodeInteractionAddonProvider>
-                          </RegisterComponents>
-                        </RenderingProvider>
-                      </VisibleFlowsProvider>
-                    </VisualizationProvider>
+                    <VisibleFlowsProvider>
+                      <VisibleFlowsConsumer />
+                    </VisibleFlowsProvider>
                   </CatalogTilesProvider>
                 </Shell>
               </EntitiesProvider>
@@ -72,5 +61,30 @@ function App() {
     </SettingsProvider>
   );
 }
+
+const VisibleFlowsConsumer: FunctionComponent = () => {
+  const { camelResource, updateEntitiesFromCamelResource } = useContext(EntitiesContext)!;
+  const { visualFlowsApi } = useContext(VisibleFlowsContext)!;
+  const controller = useMemo(
+    () => ControllerService.createController(visualFlowsApi, camelResource, updateEntitiesFromCamelResource),
+    [visualFlowsApi, camelResource, updateEntitiesFromCamelResource],
+  );
+
+  return (
+    <VisualizationProvider controller={controller}>
+      <RenderingProvider>
+        <RegisterComponents>
+          <NodeInteractionAddonProvider>
+            <RegisterNodeInteractionAddons>
+              <SuggestionRegistryProvider>
+                <Outlet />
+              </SuggestionRegistryProvider>
+            </RegisterNodeInteractionAddons>
+          </NodeInteractionAddonProvider>
+        </RegisterComponents>
+      </RenderingProvider>
+    </VisualizationProvider>
+  );
+};
 
 export default App;
