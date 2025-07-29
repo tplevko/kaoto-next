@@ -6,6 +6,7 @@ import { EntityType } from '../../../../models/camel/entities';
 import { EntitiesContext } from '../../../../providers/entities.provider';
 import { VisibleFlowsContext } from '../../../../providers/visible-flows.provider';
 import './NewEntity.scss';
+import { sourceSchemaConfig } from '../../../../testing-api';
 
 export const NewEntity: FunctionComponent = () => {
   const { camelResource, updateEntitiesFromCamelResource } = useContext(EntitiesContext)!;
@@ -14,6 +15,8 @@ export const NewEntity: FunctionComponent = () => {
   const menuRef = useRef<HTMLDivElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
   const groupedEntities = useRef<BaseVisualCamelEntityDefinition>(camelResource.getCanvasEntityList());
+  const { currentSchemaType } = useContext(EntitiesContext)!;
+  const isMultipleRoutes = sourceSchemaConfig.config[currentSchemaType].multipleRoute;
 
   const onSelect = useCallback(
     (_event: unknown, entityType: string | number | undefined) => {
@@ -60,7 +63,9 @@ export const NewEntity: FunctionComponent = () => {
     },
     [],
   );
-
+  if (!isMultipleRoutes) {
+    return null;
+  }
   return (
     <MenuContainer
       isOpen={isOpen}
