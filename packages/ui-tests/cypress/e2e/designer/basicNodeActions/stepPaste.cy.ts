@@ -98,7 +98,8 @@ describe('Tests for Design page', { browser: '!firefox' }, () => {
       __kaoto_marker: 'kaoto-node',
     });
 
-    cy.selectPasteNode('marshal', 'paste-as-next-step');
+    // workaround for https://github.com/KaotoIO/kaoto/issues/2885
+    cy.forcePerformNodeAction('marshal', `paste-as-next-step`);
     cy.checkNodeExist('amqp', 1);
 
     cy.openSourceCode();
