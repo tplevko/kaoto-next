@@ -60,10 +60,12 @@ Cypress.Commands.add('selectReplaceNode', (nodeName: string, nodeIndex?: number)
 });
 
 Cypress.Commands.add('selectCopyNode', (nodeName: string, nodeIndex?: number) => {
+  cy.wait(200);
   cy.performNodeAction(nodeName, 'copy', nodeIndex);
 });
 
 Cypress.Commands.add('selectPasteNode', (nodeName: string, pasteType: string, nodeIndex?: number) => {
+  cy.wait(200);
   if (pasteType === 'paste-as-child') {
     cy.performNodeAction(nodeName, `paste-as-child`, nodeIndex);
   } else if (pasteType === 'paste-as-special-child') {
