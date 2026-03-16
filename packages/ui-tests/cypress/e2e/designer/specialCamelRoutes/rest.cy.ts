@@ -4,12 +4,10 @@ describe('Test for root rest container', () => {
   });
 
   it('Root rest configuration', () => {
-    cy.selectCamelRouteType('Rest', 'rest');
+    cy.openRestEditor();
 
-    // Open rest configuration tab, using the first rest node
-    cy.get(`g[data-grouplabel^="rest-"]`).eq(0).click({ force: true });
-
-    cy.selectFormTab('All');
+    cy.get('[data-testid="rest-tree-toolbar-menu"]').find('button').click();
+    cy.get('[data-testid="add-rest-service-btn"]').click();
 
     cy.interactWithConfigInputObject('description', 'description Label');
     cy.interactWithConfigInputObject('path', 'testPath');
@@ -18,8 +16,15 @@ describe('Test for root rest container', () => {
     cy.selectInTypeaheadField('bindingMode', 'json');
 
     // Insert special node intercept to Route Configuration
-    cy.selectInsertSpecialNode('description Label');
-    cy.chooseFromCatalog('processor', 'get');
+    cy.get('[data-testid="rest-tree-toolbar-menu"]').find('button').click();
+    cy.get('[data-testid="add-rest-operation-btn"]').click();
+
+    cy.get('[data-testid="#.method-typeahead-select-input"]').find('input').clear().type('get');
+    cy.get('[data-testid="add-method-modal"]').within(() => {
+      cy.interactWithConfigInputObject('path', 'testPath');
+      cy.interactWithConfigInputObject('id', 'testId');
+    });
+    cy.get('[data-testid="add-method-modal-add-btn"]').click();
 
     cy.openSourceCode();
 

@@ -56,15 +56,22 @@ export const RestTreeToolbar: FunctionComponent<RestTreeToolbarProps> = ({
 
   return (
     <div className="rest-tree-toolbar">
-      <MenuButton kind="tertiary" label="Actions">
+      <MenuButton kind="tertiary" label="Actions" data-testid="rest-tree-toolbar-menu">
         <MenuItem
           label="Add Configuration"
           renderIcon={Add}
           onClick={onAddRestConfiguration}
           disabled={hasRestConfiguration}
+          data-testid="add-rest-configuration-btn"
         />
-        <MenuItem label="Add Service" renderIcon={Add} onClick={onAddRest} />
-        <MenuItem label="Add Operation" renderIcon={Add} onClick={openAddMethodModal} disabled={!selectedRestEntity} />
+        <MenuItem label="Add Service" renderIcon={Add} onClick={onAddRest} data-testid="add-rest-service-btn" />
+        <MenuItem
+          label="Add Operation"
+          renderIcon={Add}
+          onClick={openAddMethodModal}
+          disabled={!selectedRestEntity}
+          data-testid="add-rest-operation-btn"
+        />
         <MenuItemDivider />
         <MenuItem kind="danger" label="Delete" renderIcon={TrashCan} onClick={onDelete} disabled={!selectedElement} />
       </MenuButton>
