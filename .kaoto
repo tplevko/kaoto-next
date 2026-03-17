@@ -1,0 +1,65 @@
+{
+	"kaoto-datamapper-cf2a3471": {
+		"sourceBody": {
+			"type": "XML Schema",
+			"filePath": [
+				"node_modules/@kaoto/kaoto-tests/cypress/fixtures/datamapper/xsd/ShipOrder.xsd"
+			],
+			"fieldTypeOverrides": []
+		},
+		"sourceParameters": {},
+		"targetBody": {
+			"type": "JSON Schema",
+			"filePath": [
+				"node_modules/@kaoto/kaoto/src/stubs/datamapper/json/ShipOrder.schema.json"
+			],
+			"fieldTypeOverrides": []
+		},
+		"xsltPath": "kaoto-datamapper-cf2a3471.xsl",
+		"namespaceMap": {}
+	},
+	"kaoto-datamapper-2d756823": {
+		"sourceBody": {
+			"type": "JSON Schema",
+			"filePath": [
+				"packages/ui/src/stubs/datamapper/json/ShipOrder.schema.json"
+			]
+		},
+		"sourceParameters": {},
+		"targetBody": {
+			"type": "JSON Schema",
+			"filePath": [
+				"node_modules/@kaoto/kaoto/src/stubs/datamapper/json/Cart.schema.json"
+			]
+		},
+		"xsltPath": "kaoto-datamapper-2d756823.xsl",
+		"namespaceMap": {
+			"xs": "http://www.w3.org/2001/XMLSchema",
+			"fn": "http://www.w3.org/2005/xpath-functions",
+			"ns0": "kaoto.datamapper.test"
+		}
+	},
+	"kaoto-datamapper-718dbdfd": {
+		"sourceBody": {
+			"type": "XML Schema",
+			"filePath": [
+				"node_modules/@kaoto/kaoto-tests/cypress/fixtures/datamapper/xsd/Cart.xsd"
+			]
+		},
+		"sourceParameters": {},
+		"targetBody": {
+			"type": "XML Schema",
+			"filePath": [
+				"packages/ui/src/stubs/datamapper/xml/MultiIncludeComponentA.xsd",
+				"packages/ui/src/stubs/datamapper/xml/MultiIncludeMain.xsd",
+				"packages/ui/src/stubs/datamapper/xml/MultiIncludeComponentB.xsd"
+			]
+		},
+		"xsltPath": "kaoto-datamapper-718dbdfd.xsl",
+		"namespaceMap": {
+			"xs": "http://www.w3.org/2001/XMLSchema",
+			"fn": "http://www.w3.org/2005/xpath-functions",
+			"ns0": "kaoto.datamapper.test"
+		}
+	}
+}

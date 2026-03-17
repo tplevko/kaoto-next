@@ -1,0 +1,39 @@
+- route:
+    id: route-addPet
+    from:
+      id: direct-from-addPet
+      uri: direct
+      parameters:
+        period: "1000"
+        timerName: template
+        name: test
+      steps:
+        - to:
+            id: to-1637
+            uri: direct
+            parameters:
+              name: other
+- route:
+    from:
+      uri: direct
+      parameters:
+        name: test
+      steps:
+        - to:
+            id: to-1422
+            uri: direct
+            parameters:
+              name: other
+    id: route-1234
+- route:
+    from:
+      uri: direct
+      parameters:
+        name: other
+      steps:
+        - to:
+            id: to-5326
+            uri: direct
+            parameters:
+              name: test
+    id: route-4321
