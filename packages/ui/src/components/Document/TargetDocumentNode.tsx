@@ -3,6 +3,7 @@ import { FunctionComponent, KeyboardEvent, memo, MouseEvent, useCallback, useMem
 
 import { useDataMapper } from '../../hooks/useDataMapper';
 import { DocumentTreeNode } from '../../models/datamapper/document-tree-node';
+import { MappingItem } from '../../models/datamapper/mapping';
 import {
   AddMappingNodeData,
   FieldItemNodeData,
@@ -57,9 +58,22 @@ export const TargetDocumentNode: FunctionComponent<DocumentNodeProps> = memo(({ 
   const isDraggable =
     !(nodeData instanceof UnknownMappingNodeData) &&
     (!isDocument || VisualizationService.isPrimitiveDocumentNode(nodeData));
-  const nodePathString = nodeData.path.toString();
+  const headerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const nodeRefId = nodeData.path.toString();
+  const nodeReference = useRef<NodeReference>({
+    path: nodeRefId,
+    isSource: false,
+    get headerRef() {
+      return headerRef.current;
+    },
+    get containerRef() {
+      return containerRef.current;
+    },
+  });
+  getNodeReference(nodeRefId) !== nodeReference && setNodeReference(nodeRefId, nodeReference);
 
-  const showNodeActions = useMemo(() => (isDocument && isPrimitive) || !isDocument, [isDocument, isPrimitive]);
+  const showNodeActions = (isDocument && isPrimitive) || !isDocument;
   const { refreshMappingTree } = useDataMapper();
   const handleUpdate = useCallback(() => {
     refreshMappingTree();
@@ -108,6 +122,9 @@ export const TargetDocumentNode: FunctionComponent<DocumentNodeProps> = memo(({ 
               isCollectionField={isCollectionField}
               isChoiceField={isChoiceField}
               isAttributeField={isAttributeField}
+              commentText={commentText}
+              mapping={mappingItem}
+              onUpdate={handleUpdate}
               title={<NodeTitle className="node__spacer" nodeData={nodeData} isDocument={isDocument} rank={rank} />}
               rank={rank}
               isSelected={isSelected}
