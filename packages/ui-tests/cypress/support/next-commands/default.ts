@@ -70,6 +70,7 @@ Cypress.Commands.add('openDesignPage', () => {
   cy.expandVisualization();
   cy.get('[data-testid="Design"]').click();
   cy.get('.pf-topology-container').should('be.visible');
+  cy.reload();
 });
 
 Cypress.Commands.add('openSourceCode', () => {

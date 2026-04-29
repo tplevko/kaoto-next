@@ -104,6 +104,25 @@ Cypress.Commands.add('selectRemoveGroup', (groupName: string, groupIndex?: numbe
 Cypress.Commands.add('chooseFromCatalog', (_nodeType: string, name: string) => {
   cy.get(`input[placeholder="Filter by name, description or tag"]`).click();
   cy.get(`input[placeholder="Filter by name, description or tag"]`).type(name);
+
+  // Retry logic for clicking the catalog item
+  cy.wrap(null).then(() => {
+    cy.wait(200).then(() => {
+      cy.get('body').then(($body) => {
+        if ($body.find(`#${name}:visible`).length === 0) {
+          cy.log(`Catalog item #${name} not visible, retrying...`);
+          cy.get(`input[placeholder="Filter by name, description or tag"]`).click();
+          cy.get(`input[placeholder="Filter by name, description or tag"]`).clear();
+          cy.get(`input[placeholder="Filter by name, description or tag"]`).click();
+          cy.get(`input[placeholder="Filter by name, description or tag"]`).type(name);
+          cy.wait(300);
+          cy.get(`#${name}`).should('be.visible');
+        }
+      });
+    });
+  });
+
+  // Click the catalog item
   cy.get(`#${name}`).should('be.visible').click();
   // wait for the canvas rerender
   cy.wait(1000);
