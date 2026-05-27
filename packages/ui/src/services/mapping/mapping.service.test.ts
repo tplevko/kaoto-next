@@ -890,4 +890,119 @@ describe('MappingService', () => {
       expect(variable.expression).toEqual('newExpr');
     });
   });
+
+  describe('addInnerForEach()', () => {
+    it('should add first for-each to FieldItem and move existing children into it', () => {
+      // Create a fresh FieldItem without any existing ForEachItem children
+      const freshFieldItem = new FieldItem(tree, targetDoc.fields[0]);
+      const field1 = new FieldItem(freshFieldItem, targetDoc.fields[0].fields[0]);
+      const field2 = new FieldItem(freshFieldItem, targetDoc.fields[0].fields[1]);
+      const valueSelector = new ValueSelector(freshFieldItem, ValueType.VALUE);
+      freshFieldItem.children = [field1, field2, valueSelector];
+
+      MappingService.addInnerForEach(freshFieldItem);
+
+      // Should have ValueSelector + ForEachItem
+      expect(freshFieldItem.children.length).toEqual(2);
+      expect(freshFieldItem.children[0]).toBe(valueSelector);
+      expect(freshFieldItem.children[1]).toBeInstanceOf(ForEachItem);
+
+      const forEachItem = freshFieldItem.children[1] as ForEachItem;
+      expect(forEachItem.parent).toBe(freshFieldItem);
+      // The two field items should be moved into the for-each
+      expect(forEachItem.children.length).toEqual(2);
+      expect(forEachItem.children[0]).toBe(field1);
+      expect(forEachItem.children[1]).toBe(field2);
+      forEachItem.children.forEach((child) => {
+        expect(child.parent).toBe(forEachItem);
+      });
+    });
+
+    it('should add empty for-each as sibling when FieldItem already has ForEachItem children', () => {
+      const shipOrderItem = tree.children[0] as FieldItem;
+      const existingForEach = new ForEachItem(shipOrderItem);
+      shipOrderItem.children = [existingForEach];
+
+      MappingService.addInnerForEach(shipOrderItem);
+
+      expect(shipOrderItem.children.length).toEqual(2);
+      expect(shipOrderItem.children[0]).toBe(existingForEach);
+      expect(shipOrderItem.children[1]).toBeInstanceOf(ForEachItem);
+
+      const newForEach = shipOrderItem.children[1] as ForEachItem;
+      expect(newForEach.parent).toBe(shipOrderItem);
+      expect(newForEach.children.length).toEqual(0);
+    });
+
+    it('should nest for-each inside existing ForEachItem parent', () => {
+      const shipOrderItem = tree.children[0] as FieldItem;
+      const parentForEach = new ForEachItem(shipOrderItem);
+      const fieldItem = new FieldItem(parentForEach, targetDoc.fields[0].fields[0]);
+      parentForEach.children.push(fieldItem);
+      const valueSelector = new ValueSelector(parentForEach, ValueType.VALUE);
+      parentForEach.children.push(valueSelector);
+
+      MappingService.addInnerForEach(parentForEach);
+
+      // Should have ValueSelector + nested ForEachItem
+      expect(parentForEach.children.length).toEqual(2);
+      expect(parentForEach.children[0]).toBe(valueSelector);
+      expect(parentForEach.children[1]).toBeInstanceOf(ForEachItem);
+
+      const nestedForEach = parentForEach.children[1] as ForEachItem;
+      expect(nestedForEach.parent).toBe(parentForEach);
+      expect(nestedForEach.children.length).toEqual(1);
+      expect(nestedForEach.children[0]).toBe(fieldItem);
+      expect(fieldItem.parent).toBe(nestedForEach);
+    });
+  });
+
+  describe('addInnerChooseWhenOtherwise()', () => {
+    it('should add choose/when/otherwise to FieldItem and move existing children into when branch', () => {
+      const shipOrderItem = tree.children[0] as FieldItem;
+      const childrenBefore = shipOrderItem.children.slice();
+
+      MappingService.addInnerChooseWhenOtherwise(shipOrderItem);
+
+      expect(shipOrderItem.children.length).toEqual(1);
+      expect(shipOrderItem.children[0]).toBeInstanceOf(ChooseItem);
+
+      const chooseItem = shipOrderItem.children[0] as ChooseItem;
+      expect(chooseItem.parent).toBe(shipOrderItem);
+      expect(chooseItem.when.length).toEqual(1);
+      expect(chooseItem.otherwise).toBeTruthy();
+
+      const whenItem = chooseItem.when[0];
+      expect(whenItem.parent).toBe(chooseItem);
+      // When branch should have the original children (except ValueSelector)
+      const nonValueSelectorChildren = childrenBefore.filter((c) => !(c instanceof ValueSelector));
+      expect(whenItem.children.length).toEqual(nonValueSelectorChildren.length);
+    });
+
+    it('should clone children into otherwise branch', () => {
+      const shipOrderItem = tree.children[0] as FieldItem;
+      const orderIdField = shipOrderItem.children[0] as FieldItem;
+
+      MappingService.addInnerChooseWhenOtherwise(shipOrderItem);
+
+      const chooseItem = shipOrderItem.children[0] as ChooseItem;
+      const whenItem = chooseItem.when[0];
+      const otherwiseItem = chooseItem.otherwise!;
+
+      // Both branches should have children
+      expect(whenItem.children.length).toBeGreaterThan(0);
+      expect(otherwiseItem.children.length).toEqual(whenItem.children.length);
+
+      // Children should be different instances (cloned)
+      expect(whenItem.children[0]).not.toBe(otherwiseItem.children[0]);
+      expect(whenItem.children[0]).toBeInstanceOf(FieldItem);
+      expect(otherwiseItem.children[0]).toBeInstanceOf(FieldItem);
+
+      // But they should have the same field
+      const whenFieldItem = whenItem.children[0] as FieldItem;
+      const otherwiseFieldItem = otherwiseItem.children[0] as FieldItem;
+      expect(whenFieldItem.field).toBe(orderIdField.field);
+      expect(otherwiseFieldItem.field).toBe(orderIdField.field);
+    });
+  });
 });
