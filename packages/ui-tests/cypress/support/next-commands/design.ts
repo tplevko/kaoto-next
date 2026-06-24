@@ -165,9 +165,9 @@ Cypress.Commands.add('forcePerformNodeAction', (nodeName: string, action: Action
     // Check if menu appeared, if not, right-click again with retries
     for (let i = 0; i < 10; i++) {
       cy.get('body').then(($body) => {
+        cy.wait(500);
         if ($body.find(menuItemSelector).length === 0) {
           cy.log('Context menu not visible, retrying right-click...');
-          cy.wait(500);
           cy.get(nodeSelector).eq(nodeIndex).rightclick({ force: true });
         } else {
           return;

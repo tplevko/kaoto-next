@@ -417,12 +417,17 @@ Cypress.Commands.add('assertValueCopiedToClipboard', (value) => {
 });
 
 Cypress.Commands.add('addValueToClipboard', (value) => {
-  cy.window().then(async (win) => {
+  cy.window().then((win) => {
+    // Focus the window to ensure clipboard access works
+    win.focus();
     if (win.navigator?.clipboard?.writeText) {
-      await win.navigator?.clipboard?.writeText(JSON.stringify(value));
-      const text = await win.navigator?.clipboard?.readText();
-      const parsedContent = JSON.parse(text);
-      expect(parsedContent).to.deep.equal(value);
+      // Return the promise so Cypress waits for it to complete
+      return win.navigator.clipboard.writeText(JSON.stringify(value)).then(() => {
+        return win.navigator.clipboard.readText().then((text) => {
+          const parsedContent = JSON.parse(text);
+          expect(parsedContent).to.deep.equal(value);
+        });
+      });
     } else {
       // For browsers without clipboard API support, skip this
       cy.log('Clipboard API not available - skipping clipboard addition');
