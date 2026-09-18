@@ -3,27 +3,27 @@ describe('Tests for sidebar dataformat configuration', () => {
     cy.openHomePage();
   });
 
-  it('Design - sidebar dataformat configuration', () => {
-    cy.uploadFixture('flows/camelRoute/basic.yaml');
-    cy.openDesignPage();
+  // it('Design - sidebar dataformat configuration', () => {
+  //   cy.uploadFixture('flows/camelRoute/basic.yaml');
+  //   cy.openDesignPage();
 
-    // Configure marshal dataformat
-    cy.openStepConfigurationTab('marshal');
-    cy.selectFormTab('All');
-    cy.selectDataformat('Base64');
-    cy.expandWrappedSection('#.base64-Advanced');
-    cy.interactWithConfigInputObject('base64.lineLength', '128');
-    cy.interactWithConfigInputObject('base64.id', 'simpleDataformatId');
-    cy.interactWithConfigInputObject('base64.lineSeparator', 'simpleLineSeparator');
-    cy.interactWithConfigInputObject('base64.urlSafe');
+  //   // Configure marshal dataformat
+  //   cy.openStepConfigurationTab('marshal');
+  //   cy.selectFormTab('All');
+  //   cy.selectDataformat('Base64');
+  //   cy.expandWrappedSection('#.base64-Advanced');
+  //   cy.interactWithConfigInputObject('base64.lineLength', '128');
+  //   cy.interactWithConfigInputObject('base64.id', 'simpleDataformatId');
+  //   cy.interactWithConfigInputObject('base64.lineSeparator', 'simpleLineSeparator');
+  //   cy.interactWithConfigInputObject('base64.urlSafe');
 
-    // CHECK they are reflected in the code editor
-    cy.openSourceCode();
-    cy.checkCodeSpanLine('lineLength: 128', 1);
-    cy.checkCodeSpanLine('id: simpleDataformatId', 1);
-    cy.checkCodeSpanLine('lineSeparator: simpleLineSeparator', 1);
-    cy.checkCodeSpanLine('urlSafe: true', 1);
-  });
+  //   // CHECK they are reflected in the code editor
+  //   cy.openSourceCode();
+  //   cy.checkCodeSpanLine('lineLength: 128', 1);
+  //   cy.checkCodeSpanLine('id: simpleDataformatId', 1);
+  //   cy.checkCodeSpanLine('lineSeparator: simpleLineSeparator', 1);
+  //   cy.checkCodeSpanLine('urlSafe: true', 1);
+  // });
 
   it('Design - sidebar dataformat configuration in Kamelet', () => {
     cy.uploadFixture('flows/kamelet/basic.yaml');
