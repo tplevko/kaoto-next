@@ -1,6 +1,9 @@
+import * as matchers from '@testing-library/jest-dom/matchers';
 import '@testing-library/jest-dom/vitest';
 
-import { beforeEach, vi } from 'vitest';
+import { beforeEach, expect, vi } from 'vitest';
+
+expect.extend(matchers);
 
 // Mock Carbon's Toggletip with a passthrough that renders its children but
 // avoids activating @floating-ui/react's useFloating (which happens when
