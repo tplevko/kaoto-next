@@ -21,11 +21,7 @@ export const CanvasFormTabsProvider: FunctionComponent<PropsWithChildren<{ tab?:
   const [selectedTab, setSelectedTab] = useState<TabKeys>(tab);
   const contextValue = useMemo(() => ({ selectedTab, setSelectedTab }), [selectedTab]);
 
-  return (
-    <CanvasFormTabsContext.Provider value={contextValue}>
-      {children}
-    </CanvasFormTabsContext.Provider>
-  );
+  return <CanvasFormTabsContext.Provider value={contextValue}>{children}</CanvasFormTabsContext.Provider>;
 };
 
 export const FormTabsModes = {

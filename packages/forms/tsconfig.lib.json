@@ -1,14 +1,14 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "baseUrl": "src/form",
+    "baseUrl": "src",
     "outDir": "dist",
-    "rootDir": "src/form",
+    "rootDir": "src",
     "module": "es6",
     "target": "es6",
     "esModuleInterop": true,
     "moduleResolution": "node"
   },
-  "include": ["src/form/**/*"],
-  "exclude": ["node_modules", "src/testapp", "src/__mocks__", "**/*.test.*"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "src/__mocks__", "src/stubs", "**/*.test.*"]
 }

@@ -28,15 +28,9 @@
     "dist"
   ],
   "scripts": {
-    "e2e": "cypress open --config-file=cypress.config.ts",
-    "e2e:headless": "cypress run",
-    "start": "vite --mode=dev",
     "build": "yarn rimraf dist && yarn build:lib",
-    "build:lib": "tsc --project tsconfig.lib.json && copyfiles -u 2 ./src/form/**/*.scss ./dist",
-    "build:lib:watch": "tsc --project tsconfig.lib.json --watch",
-    "build:site": "vite build  --config vite.config.mjs",
+    "build:lib": "tsc --project tsconfig.lib.json && copyfiles -u 1 ./src/**/*.scss ./dist",
     "test": "vitest run --config vitest.config.mts",
-    "preview": "vite preview",
     "publish": "lerna publish"
   },
   "dependencies": {
