@@ -199,7 +199,7 @@ exports[`BeanField > UnprefixedBeanField > should render 1`] = `
             <input
               aria-activedescendant=""
               aria-autocomplete="list"
-              aria-controls="downshift-_r_ot_-menu"
+              aria-controls="downshift-_r_pb_-menu"
               aria-expanded="false"
               aria-haspopup="listbox"
               aria-label="#"
@@ -236,11 +236,11 @@ exports[`BeanField > UnprefixedBeanField > should render 1`] = `
               </svg>
             </button>
             <button
-              aria-controls="downshift-_r_ot_-menu"
+              aria-controls="downshift-_r_pb_-menu"
               aria-expanded="false"
               aria-label="Open"
               class="cds--list-box__menu-icon"
-              id="downshift-_r_ot_-toggle-button"
+              id="downshift-_r_pb_-toggle-button"
               tabindex="-1"
               title="Open"
               type="button"
@@ -262,9 +262,9 @@ exports[`BeanField > UnprefixedBeanField > should render 1`] = `
             </button>
           </div>
           <ul
-            aria-labelledby="downshift-_r_ot_-label"
+            aria-labelledby="downshift-_r_pb_-label"
             class="cds--list-box__menu"
-            id="downshift-_r_ot_-menu"
+            id="downshift-_r_pb_-menu"
             role="listbox"
           />
         </div>
