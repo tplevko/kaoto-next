@@ -1,4 +1,4 @@
-import { FunctionComponent, PropsWithChildren, createContext, useState } from 'react';
+import { FunctionComponent, PropsWithChildren, createContext, useMemo, useState } from 'react';
 
 type TabKeys = keyof typeof FormTabsModes;
 export interface CanvasFormTabsContextResult {
@@ -19,14 +19,10 @@ export const CanvasFormTabsProvider: FunctionComponent<PropsWithChildren<{ tab?:
   children,
 }) => {
   const [selectedTab, setSelectedTab] = useState<TabKeys>(tab);
+  const contextValue = useMemo(() => ({ selectedTab, setSelectedTab }), [selectedTab]);
 
   return (
-    <CanvasFormTabsContext.Provider
-      value={{
-        selectedTab,
-        setSelectedTab,
-      }}
-    >
+    <CanvasFormTabsContext.Provider value={contextValue}>
       {children}
     </CanvasFormTabsContext.Provider>
   );

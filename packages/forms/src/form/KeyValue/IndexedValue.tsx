@@ -97,6 +97,7 @@ export const IndexedValue: FunctionComponent<KeyValueProps> = ({
 
       {internalModel.map(([key, value], index) => {
         return (
+          // NOSONAR typescript:S6479 - intentional: using pair key as React key causes input focus loss on update
           <Grid key={index}>
             <Column sm={1} md={2} lg={3}>
               <span data-testid={`${propName}__index`}>{key}</span>

@@ -12,8 +12,9 @@ export const AllOfField: FunctionComponent<FieldProps> = ({ propName, required, 
   return (
     <>
       {schema.allOf.map((schema, index) => {
+        const key = schema.$ref ?? schema.type ?? schema.title ?? index;
         return (
-          <SchemaProvider key={index} schema={schema}>
+          <SchemaProvider key={String(key)} schema={schema}>
             <AutoField propName={propName} required={required} onRemove={onRemove} />
           </SchemaProvider>
         );

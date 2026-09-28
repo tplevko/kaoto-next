@@ -12,8 +12,9 @@ export const AnyOfField: FunctionComponent<AnyOfFieldProps> = ({ propName, anyOf
   return (
     <>
       {anyOf?.map((schema, index) => {
+        const key = schema.$ref ?? schema.type ?? schema.title ?? index;
         return (
-          <SchemaProvider key={index} schema={schema}>
+          <SchemaProvider key={String(key)} schema={schema}>
             <AutoField propName={propName} />
           </SchemaProvider>
         );

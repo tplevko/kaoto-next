@@ -6,9 +6,7 @@ export const applySuggestion = (
   inputValue: string | number,
   cursorPosition?: number | null,
 ): { newValue: string; cursorPosition: number } => {
-  const cursor = cursorPosition ?? 0;
-
-  const { word, cursorStart, cursorEnd } = getCursorWord(inputValue, cursorPosition);
+  const { cursorStart, cursorEnd } = getCursorWord(inputValue, cursorPosition);
 
   const firstSection = inputValue.toString().substring(0, cursorStart);
   const lastSection = inputValue.toString().substring(cursorEnd);

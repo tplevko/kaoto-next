@@ -62,7 +62,7 @@ describe('NewEndpointModal', () => {
       { wrapper: SuggestionRegistryProvider },
     );
 
-    await screen.findByTestId('NewEndpointModal');
+    expect(await screen.findByTestId('NewEndpointModal')).toBeInTheDocument();
   });
 
   it('should not render anything if there is no schema', () => {
@@ -86,7 +86,7 @@ describe('NewEndpointModal', () => {
       { wrapper: SuggestionRegistryProvider },
     );
 
-    await screen.findByText('Create endpoint');
+    expect(await screen.findByText('Create endpoint')).toBeInTheDocument();
   });
 
   it('should display correct title for Update mode', async () => {
@@ -100,7 +100,7 @@ describe('NewEndpointModal', () => {
       { wrapper: SuggestionRegistryProvider },
     );
 
-    await screen.findByText('Update endpoint');
+    expect(await screen.findByText('Update endpoint')).toBeInTheDocument();
   });
 
   it('should call onCancel when cancel button is clicked', async () => {
@@ -214,9 +214,11 @@ describe('NewEndpointModal', () => {
       { wrapper: SuggestionRegistryProvider },
     );
 
-    await screen.findByText(
-      'Send and receive test actions may reference this endpoint by its name when sending and receiving messages during the test.',
-    );
+    expect(
+      await screen.findByText(
+        'Send and receive test actions may reference this endpoint by its name when sending and receiving messages during the test.',
+      ),
+    ).toBeInTheDocument();
   });
 
   it('should use provided endpoint and type when both are given', async () => {

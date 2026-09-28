@@ -189,8 +189,8 @@ describe('EndpointField', () => {
       fireEvent.click(toggle);
 
       // Check that both endpoints appear in the dropdown
-      await screen.findByText('httpClient');
-      await screen.findByText('jmsQueue');
+      expect(await screen.findByText('httpClient')).toBeInTheDocument();
+      expect(await screen.findByText('jmsQueue')).toBeInTheDocument();
     });
   });
 
@@ -433,7 +433,7 @@ describe('EndpointField', () => {
       fireEvent.click(toggle);
 
       // Check that the dynamic endpoint appears
-      await screen.findByText('dynamicJmsEndpoint');
+      expect(await screen.findByText('dynamicJmsEndpoint')).toBeInTheDocument();
     });
   });
 

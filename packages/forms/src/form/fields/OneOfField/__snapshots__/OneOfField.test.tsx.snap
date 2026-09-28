@@ -58,8 +58,8 @@ exports[`OneOfField > should render correctly with basic oneOf schema 1`] = `
         <div
           class="cds--stack-vertical cds--stack-scale-3"
         >
-          <div
-            role="group"
+          <fieldset
+            style="margin: 0px; padding: 0px;"
           >
             <div
               class="cds--content-switcher cds--content-switcher--md cds--layout--size-md cds--layout-constraint--size__default-md cds--layout-constraint--size__min-sm cds--layout-constraint--size__max-lg"
@@ -94,7 +94,7 @@ exports[`OneOfField > should render correctly with basic oneOf schema 1`] = `
                 </span>
               </button>
             </div>
-          </div>
+          </fieldset>
         </div>
       </div>
     </div>

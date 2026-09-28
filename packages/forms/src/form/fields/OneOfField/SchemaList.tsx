@@ -59,7 +59,7 @@ export const SchemaList: FunctionComponent<PropsWithChildren<SchemaList>> = ({
 
   return (
     <Stack gap={3}>
-      <div role="group">
+      <fieldset style={{ border: 'none', margin: 0, padding: 0 }}>
         {useTypeahead ? (
           <Typeahead
             aria-label={ariaLabel}
@@ -81,7 +81,7 @@ export const SchemaList: FunctionComponent<PropsWithChildren<SchemaList>> = ({
             onChange={onItemChange}
           />
         )}
-      </div>
+      </fieldset>
 
       {children}
     </Stack>
