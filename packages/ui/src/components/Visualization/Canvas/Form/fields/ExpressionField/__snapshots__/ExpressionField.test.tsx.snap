@@ -56,8 +56,8 @@ exports[`ExpressionField > renders empty expression field with schema 1`] = `
         <div
           class="cds--stack-vertical cds--stack-scale-3"
         >
-          <div
-            role="group"
+          <fieldset
+            style="margin: 0px; padding: 0px;"
           >
             <div>
               <div
@@ -121,7 +121,7 @@ exports[`ExpressionField > renders empty expression field with schema 1`] = `
                 </div>
               </div>
             </div>
-          </div>
+          </fieldset>
         </div>
       </div>
     </div>
@@ -187,8 +187,8 @@ exports[`ExpressionField > renders expression field with selection 1`] = `
         <div
           class="cds--stack-vertical cds--stack-scale-3"
         >
-          <div
-            role="group"
+          <fieldset
+            style="margin: 0px; padding: 0px;"
           >
             <div>
               <div
@@ -274,7 +274,7 @@ exports[`ExpressionField > renders expression field with selection 1`] = `
                 </div>
               </div>
             </div>
-          </div>
+          </fieldset>
         </div>
       </div>
     </div>
