@@ -23,6 +23,7 @@
     "chromatic": "chromatic --build-script-name 'build:storybook' --exit-zero-on-changes --project-token=$CHROMATIC_PROJECT_TOKEN"
   },
   "devDependencies": {
+    "@carbon/styles": "^1.99.0",
     "@cypress/grep": "^7.0.0",
     "@eslint/js": "^9.10.0",
     "@patternfly/patternfly": "^6.6.1",
@@ -66,6 +67,7 @@
     "@kaoto/camel-catalog": "^0.10.7",
     "@kaoto/forms": "^1.9.0",
     "@kaoto/kaoto": "workspace:*",
+    "@kaoto/kaoto-web": "workspace:*",
     "storybook": "^10.6.1"
   },
   "eslintConfig": {

@@ -1096,12 +1096,30 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@carbon/colors@npm:^11.61.0":
+  version: 11.61.0
+  resolution: "@carbon/colors@npm:11.61.0"
+  dependencies:
+    "@ibm/telemetry-js": "npm:^1.5.0"
+  checksum: 10/c16a0264b1a90ce43c4e1e8d73785a1ef64b275fb3a37c0babf92ae45bd7a53adba9ab817172645f4c058f508184d74cbbd888d27b26abdb560094595bce3210
+  languageName: node
+  linkType: hard
+
 "@carbon/feature-flags@npm:^1.10.0":
   version: 1.10.0
   resolution: "@carbon/feature-flags@npm:1.10.0"
   dependencies:
     "@ibm/telemetry-js": "npm:^1.5.0"
   checksum: 10/07402a26b09549595deb07d993dafc5188a1ed1536f97916173d30251203cfbab41e517809d3e56a3869f3c700bd04b005a0e1950d0bb5c1f4e4e85dbf969675
+  languageName: node
+  linkType: hard
+
+"@carbon/feature-flags@npm:^1.11.0":
+  version: 1.11.0
+  resolution: "@carbon/feature-flags@npm:1.11.0"
+  dependencies:
+    "@ibm/telemetry-js": "npm:^1.5.0"
+  checksum: 10/5ba45cd9e25e18ab91a8ca759c5f83b9664cfbe3554680719689056d4a8aead9be43fac53886724263c571e07378bcebbc31f9ae0018185b7622f19ca5418c83
   languageName: node
   linkType: hard
 
@@ -1131,6 +1149,16 @@ __metadata:
     "@carbon/layout": "npm:^11.60.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
   checksum: 10/2c39dbfc67a159a849728a7f3323b61f9803cbbae180509d7dca3b4fe2acff1a8635e944330df9c75c18f791ee4da86018e24586ab87cd7182f1eb9eea74ede4
+  languageName: node
+  linkType: hard
+
+"@carbon/grid@npm:^11.65.0":
+  version: 11.65.0
+  resolution: "@carbon/grid@npm:11.65.0"
+  dependencies:
+    "@carbon/layout": "npm:^11.62.0"
+    "@ibm/telemetry-js": "npm:^1.5.0"
+  checksum: 10/c0a77248f8373dc6881d36ebd38e632e7b070b9d6eecaf197af842d6d0c5a05cb48674bf584c9b813caae6d3db01a8c017162174f5e2140e86c10aa83664b13d
   languageName: node
   linkType: hard
 
@@ -1244,6 +1272,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@carbon/layout@npm:^11.62.0":
+  version: 11.62.0
+  resolution: "@carbon/layout@npm:11.62.0"
+  dependencies:
+    "@ibm/telemetry-js": "npm:^1.5.0"
+  checksum: 10/81c1096a1f42f7e37d35ffb3d9450ce7a99665bffbbb0557dffccf4acc53d3117c9701b12f11cacb022ebb5b59320803c9249ed3f2eb41e88112bae3db121354
+  languageName: node
+  linkType: hard
+
 "@carbon/motion@npm:^11.0.0, @carbon/motion@npm:^11.3.0":
   version: 11.51.0
   resolution: "@carbon/motion@npm:11.51.0"
@@ -1259,6 +1296,15 @@ __metadata:
   dependencies:
     "@ibm/telemetry-js": "npm:^1.5.0"
   checksum: 10/5bd7cb80d0804e35423a77cafc2c62a17e7a8f1adbb7931eed62e12c6746a43642ff5d4d118223c53bbe2c0ae297f3fcbd97f36d812802293203ab3440fa0971
+  languageName: node
+  linkType: hard
+
+"@carbon/motion@npm:^11.55.0":
+  version: 11.55.0
+  resolution: "@carbon/motion@npm:11.55.0"
+  dependencies:
+    "@ibm/telemetry-js": "npm:^1.5.0"
+  checksum: 10/a81de66bf5b729db955722a3806d9375720eaed9b5d1c6f2be43e7af91a60d87a5da99627608b58597594fb378120db4cfb915e37157d18c8dc964c646462ec2
   languageName: node
   linkType: hard
 
@@ -1324,6 +1370,36 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@carbon/styles@npm:^1.99.0":
+  version: 1.118.0
+  resolution: "@carbon/styles@npm:1.118.0"
+  dependencies:
+    "@carbon/colors": "npm:^11.61.0"
+    "@carbon/feature-flags": "npm:^1.11.0"
+    "@carbon/grid": "npm:^11.65.0"
+    "@carbon/layout": "npm:^11.62.0"
+    "@carbon/motion": "npm:^11.55.0"
+    "@carbon/themes": "npm:^11.84.0"
+    "@carbon/type": "npm:^11.70.0"
+    "@ibm/plex": "npm:6.4.1"
+    "@ibm/plex-mono": "npm:2.5.0"
+    "@ibm/plex-sans": "npm:1.1.0"
+    "@ibm/plex-sans-arabic": "npm:1.1.0"
+    "@ibm/plex-sans-devanagari": "npm:1.1.0"
+    "@ibm/plex-sans-hebrew": "npm:1.1.0"
+    "@ibm/plex-sans-thai": "npm:1.1.0"
+    "@ibm/plex-sans-thai-looped": "npm:1.1.0"
+    "@ibm/plex-serif": "npm:2.0.0"
+    "@ibm/telemetry-js": "npm:^1.5.0"
+  peerDependencies:
+    sass: ^1.33.0
+  peerDependenciesMeta:
+    sass:
+      optional: true
+  checksum: 10/575aa30c6772a29c8bceb3c3413748c80baf91df75bc76e0826f48153f3df205e580ee0a18f9604c0c0793f95d9a31f7fc0d252a52f2890ba3b830d9c0bf1f07
+  languageName: node
+  linkType: hard
+
 "@carbon/telemetry@npm:^0.1.0":
   version: 0.1.0
   resolution: "@carbon/telemetry@npm:0.1.0"
@@ -1359,6 +1435,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@carbon/themes@npm:^11.84.0":
+  version: 11.84.0
+  resolution: "@carbon/themes@npm:11.84.0"
+  dependencies:
+    "@carbon/colors": "npm:^11.61.0"
+    "@carbon/layout": "npm:^11.62.0"
+    "@carbon/type": "npm:^11.70.0"
+    "@ibm/telemetry-js": "npm:^1.5.0"
+    color: "npm:^4.0.0"
+  checksum: 10/d5df4e41e55851756a010efb2c417d95dfe92ea90df8199dfbad4139698b20dfa2280ab2b37243fb90c54f77d68ef59b56593b3975fce782faddbe879bf377c0
+  languageName: node
+  linkType: hard
+
 "@carbon/type@npm:^11.0.0, @carbon/type@npm:^11.66.0, @carbon/type@npm:^11.7.0":
   version: 11.66.0
   resolution: "@carbon/type@npm:11.66.0"
@@ -1378,6 +1467,17 @@ __metadata:
     "@carbon/layout": "npm:^11.60.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
   checksum: 10/59f68144174a0b122cdb1be2abacaf40974aeb14397d60edb24cd8cbdb9d54e318198aa81366ad02d34ee2fd0d17f2ddde058a8725e1e68e50d0732f3db22090
+  languageName: node
+  linkType: hard
+
+"@carbon/type@npm:^11.70.0":
+  version: 11.70.0
+  resolution: "@carbon/type@npm:11.70.0"
+  dependencies:
+    "@carbon/grid": "npm:^11.65.0"
+    "@carbon/layout": "npm:^11.62.0"
+    "@ibm/telemetry-js": "npm:^1.5.0"
+  checksum: 10/22de36e9f79e60766e14f11ff90deff57b50ffebce54c225402bb3098497499fc8881333f2bb6cc2e65cef2d6abd5a6a7150db18ce2fb0d7061aa78e503a9f81
   languageName: node
   linkType: hard
 
@@ -3591,11 +3691,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@kaoto/kaoto-tests@workspace:packages/ui-tests"
   dependencies:
+    "@carbon/styles": "npm:^1.99.0"
     "@cypress/grep": "npm:^7.0.0"
     "@eslint/js": "npm:^9.10.0"
     "@kaoto/camel-catalog": "npm:^0.10.7"
     "@kaoto/forms": "npm:^1.9.0"
     "@kaoto/kaoto": "workspace:*"
+    "@kaoto/kaoto-web": "workspace:*"
     "@patternfly/patternfly": "npm:^6.6.1"
     "@patternfly/react-core": "npm:6.6.1"
     "@storybook/addon-docs": "npm:^10.6.1"
@@ -3636,7 +3738,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@kaoto/kaoto-web@workspace:packages/kaoto-web":
+"@kaoto/kaoto-web@workspace:*, @kaoto/kaoto-web@workspace:packages/kaoto-web":
   version: 0.0.0-use.local
   resolution: "@kaoto/kaoto-web@workspace:packages/kaoto-web"
   dependencies:

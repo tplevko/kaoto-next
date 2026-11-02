@@ -1,3 +1,4 @@
+import '@carbon/styles/css/styles.css';
 import '@patternfly/patternfly/patternfly.css';
 import '@patternfly/patternfly/utilities/Accessibility/accessibility.css';
 import '@patternfly/patternfly/utilities/Display/display.css';
