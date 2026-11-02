@@ -13,6 +13,11 @@ on:
         required: false
         type: boolean
         default: false
+      run-kaoto-web:
+        description: Run the kaoto-web Cypress suite (separate config, port 4174). When false, that suite is skipped.
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   install:
@@ -219,4 +224,46 @@ jobs:
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: screenshots-edge-${{ matrix.containers }}
+          path: packages/ui-tests/cypress/screenshots
+
+  test-web-on-chrome:
+    name: kaoto-web E2E (Chrome)
+    needs: install
+    if: ${{ inputs.run-kaoto-web }}
+    runs-on: ubuntu-latest
+    container:
+      image: cypress/browsers:node-24.17.0-chrome-149.0.7827.155-1-ff-152.0-edge-149.0.4022.69-1
+      options: --user 1001
+
+    steps:
+      - name: 👷‍♀️ Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: 🔨 Cypress run
+        uses: cypress-io/github-action@c541a95ea92d9239347a2355f2e895cd4b3f8060 # v7.4.6
+        with:
+          browser: chrome
+          # Build and serve kaoto-web on port 4174 (vite preview default).
+          build: yarn workspace @kaoto/kaoto-web run build
+          start: yarn workspace @kaoto/kaoto-web run preview --host --port 4174
+          config: baseUrl=http://localhost:4174
+          config-file: cypress.kaoto-web.config.ts
+          working-directory: packages/ui-tests
+          wait-on: 'http://127.0.0.1:4174'
+          wait-on-timeout: 120
+
+      - name: 💾 Save videos
+        if: failure()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: videos-web-chrome
+          path: packages/ui-tests/cypress/videos
+
+      - name: 💾 Save screenshots
+        if: failure()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: screenshots-web-chrome
           path: packages/ui-tests/cypress/screenshots

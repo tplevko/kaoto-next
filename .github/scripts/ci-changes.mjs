@@ -28,7 +28,7 @@ import { git } from './git-client.mjs';
  * @returns {Record<string, boolean>} Union of the jobs required by every changed path.
  */
 export function selectJobs(files, eventName = 'pull_request') {
-  const jobs = { ui: false, web: false, 'vscode-smoke': false, 'vscode-full': false, deploy: false, e2e: false, chromatic: false };
+  const jobs = { ui: false, web: false, 'vscode-smoke': false, 'vscode-full': false, deploy: false, e2e: false, 'e2e-web': false, chromatic: false };
   const all = () => Object.fromEntries(Object.keys(jobs).map((key) => [key, true]));
   if (files === null) return all();
 
@@ -49,8 +49,9 @@ export function selectJobs(files, eventName = 'pull_request') {
       // tests. The build job still builds the prerequisite UI library; it does not run UI checks.
       Object.assign(jobs, { 'vscode-full': true, deploy: true });
     } else if (file.startsWith('packages/kaoto-web/')) {
-      // The current web package has its own validation and does not consume the UI library.
+      // The web package has its own unit validation and a dedicated Cypress suite.
       jobs.web = true;
+      jobs['e2e-web'] = true;
     } else if (file.startsWith('packages/ui-tests/')) {
       // Preserve this package's existing checks instead of narrowing them by test folder:
       // Cypress also ran on story/config changes, and Chromatic only had the PR exception above.

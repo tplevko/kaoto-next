@@ -16,6 +16,8 @@
     "e2e:headless-weekly": "cypress run --expose grepTags=weekly",
     "e2e-preview": "cypress open --config-file=cypress.config.ts --config baseUrl=http://localhost:4173/",
     "e2e-preview:headless": "cypress run --config baseUrl=http://localhost:4173/",
+    "e2e:kaoto-web": "cypress open --config-file=cypress.kaoto-web.config.ts",
+    "e2e:kaoto-web:headless": "cypress run --config-file=cypress.kaoto-web.config.ts",
     "lint": "yarn eslint \"cypress/**/*.{ts,tsx}\" \"stories/**/*.{ts,tsx}\"",
     "lint:fix": "yarn lint --fix",
     "storybook": "storybook dev -p 6006",

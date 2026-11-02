@@ -7,7 +7,7 @@ import { test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { selectJobs } from './ci-changes.mjs';
 
-const none = { ui: false, web: false, 'vscode-smoke': false, 'vscode-full': false, deploy: false, e2e: false, chromatic: false };
+const none = { ui: false, web: false, 'vscode-smoke': false, 'vscode-full': false, deploy: false, e2e: false, 'e2e-web': false, chromatic: false };
 const all = Object.fromEntries(Object.keys(none).map((key) => [key, true]));
 
 test('UI changes validate the UI and embedded extension (smoke groups only) without deployment', () => {
@@ -36,8 +36,16 @@ test('extension UI-test changes select full integration groups and deployment te
   });
 });
 
-test('web-only changes retain web validation without unrelated packages', () => {
-  assert.deepEqual(selectJobs(['packages/kaoto-web/src/App.tsx']), { ...none, web: true });
+test('web-only changes trigger web validation and the kaoto-web Cypress suite', () => {
+  assert.deepEqual(selectJobs(['packages/kaoto-web/src/App.tsx']), { ...none, web: true, 'e2e-web': true });
+});
+
+test('kaoto-web Cypress spec changes trigger web validation and the kaoto-web Cypress suite', () => {
+  assert.deepEqual(selectJobs(['packages/ui-tests/cypress/e2e/kaoto-web/aboutModal.cy.ts']), {
+    ...none,
+    ui: true,
+    e2e: true,
+  });
 });
 
 test('Cypress-only changes do not select extension or visual regression tests', () => {
